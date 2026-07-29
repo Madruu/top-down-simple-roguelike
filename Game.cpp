@@ -20,7 +20,6 @@ void Game::Update()
         }
         DeleteInactiveProjectiles();
     }
-    //player.GetMouseAim();
 }
 
 void Game::InitGame()

@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.hpp"
 #include "Projectile.hpp"
+#include "Enemy.hpp"
 class Game{
     public:
         Game();
@@ -13,8 +14,10 @@ class Game{
         void DeleteInactiveProjectiles();
         Player player;
         bool run;
-        //std::vector<Enemy> CreateEnemy();
+        std::vector<Enemy> CreateEnemy();
+        std::vector<Enemy> enemies;
+        //Vector2 FollowPlayer();
         //void moveEnemys();
         //void checkCollision();
-        //std::vector<Eenemy> enemies;
+        
 };

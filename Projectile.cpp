@@ -11,19 +11,17 @@ Projectile::Projectile(Vector2 position, Vector2 direction, int speed)
 
 void Projectile::Draw()
 {
-    //std::cout << "Draw is called" << std::endl;
     if(isActive)
     {
          std::cout << "Projectile pos: "
                   << position.x << ", "
                   << position.y << std::endl;
-        DrawRectangle(position.x, position.y, 20, 20, {255, 255, 255, 255});
+        DrawRectangle(position.x, position.y, 5, 40, {255, 255, 255, 255});
     }
 }
 
 void Projectile::Update()
 {
-    //position.x += speed;
     position.y += direction.y * speed;
     position.x += direction.x * speed;
     if(isActive)

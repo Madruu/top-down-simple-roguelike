@@ -26,6 +26,7 @@ void Player::MovePlayer()
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  input.x -= 1.0f;
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) input.x += 1.0f;
 
+    //Normalize vector
     float length = sqrtf(input.x * input.x + input.y * input.y);
 
     if (length > 0.0f) {
@@ -42,14 +43,6 @@ void Player::Draw()
     DrawTextureV(spr_player, playerPos, WHITE);
 }
 
-/*void Player::FireProjectile()
-{
-    if(GetTime() - lastTimeFired >= 0.1)
-    {
-        projectiles.push_back(Projectile({ playerPos.x ,playerPos.y }, GetMouseAim(), 30));
-        lastTimeFired = GetTime();
-    }
-}*/
 void Player::FireProjectile()
 {
     if(GetTime() - lastTimeFired >= 0.1)
@@ -66,17 +59,6 @@ void Player::FireProjectile()
         lastTimeFired = GetTime();
     }
 }
-/*Vector2 Player::GetMouseAim()
-{
-   Vector2 mouseLocation = GetMousePosition();
-   Vector2 direction;
-   direction.x = mouseLocation.x - playerPos.x;
-   direction.y = mouseLocation.y - playerPos.y;
-   direction = Vector2Normalize(direction);
-   std::cout << direction.x << "," << direction.y << std::endl;
-   return direction;
-    //return mouseLocation;
-}*/
 
 Vector2 Player::GetMouseAim()
 {
