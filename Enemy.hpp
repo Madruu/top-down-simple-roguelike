@@ -8,11 +8,10 @@ class Enemy {
         int GetEnemyType() const;
         static void UnloadImages();
         Rectangle GetRect();
-
+        Vector2 GetEnemyPosition() const;
     private:
         int type;
-        float moveSpeed = 200.0f;
-        //int moveSpeed = 3;
+        float moveSpeed = 100.0f;
         void FollowPlayer(const Vector2& playerPosition);
         Vector2 position;
         static Texture2D spr_enemies[3]; 

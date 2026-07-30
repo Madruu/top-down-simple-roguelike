@@ -54,3 +54,8 @@ Rectangle Enemy::GetRect()
 {
     return { position.x, position.y, static_cast<float>(spr_enemies[type - 1].width), static_cast<float>(spr_enemies[type - 1].height)};
 }
+
+Vector2 Enemy::GetEnemyPosition() const
+{
+    return position;
+}

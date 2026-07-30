@@ -15,6 +15,7 @@ void Game::Update()
 {
     if(run)
     {
+        player.MovePlayer();
         for(auto& laser: player.projectiles){
             laser.Update();
         }
@@ -57,8 +58,8 @@ void Game::HandleInputs()
 {
    if(run)
     {
-        player.MovePlayer();
-
+        player.HandleInput();
+        
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
         {
             std::cout << "Projectile fired" << std::endl;
@@ -90,7 +91,8 @@ void Game::CheckCollision()
         if(collided)
         {
             boxCollision = GetCollisionRec(playerRect, enemyRect);
-            std::cout << "Colidiu!" << std::endl;
+            std::cout << "Collided!" << std::endl;
+            player.TakeDamage(2, enemy.GetEnemyPosition());
         }
     }
 }

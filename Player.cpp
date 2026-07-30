@@ -18,9 +18,9 @@ Player::~Player()
     UnloadTexture(spr_player);
 }
 
-void Player::MovePlayer()
+void Player::HandleInput()
 {
-   Vector2 input = { 0.0f, 0.0f };
+    input = { 0.0f, 0.0f };
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    input.y -= 1.0f;
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  input.y += 1.0f;
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  input.x -= 1.0f;
@@ -33,9 +33,22 @@ void Player::MovePlayer()
         input.x /= length;
         input.y /= length;
     }
+}
 
+void Player::MovePlayer()
+{
+    // Keyboard Movement
     playerPos.x += input.x * speed * GetFrameTime();
     playerPos.y += input.y * speed * GetFrameTime();
+
+    // Knockback movement
+     playerPos = Vector2Add(
+        playerPos,
+        Vector2Scale(knockBackVelocity, GetFrameTime())
+    );
+
+    // Decreases knockback
+    knockBackVelocity = Vector2Scale(knockBackVelocity, 0.9f);
 }
 
 void Player::Draw()
@@ -91,4 +104,19 @@ Vector2 Player::GetPosition() const
 Rectangle Player::GetRect()
 {
     return { playerPos.x, playerPos.y, static_cast<float>(spr_player.width), static_cast<float>(spr_player.height)};
+}
+
+void Player::TakeDamage(int damage, const Vector2& enemySourcePosition)
+{
+    //Taking damage
+    health -= damage;
+
+    //Knockback
+    Vector2 direction = { 
+        playerPos.x - enemySourcePosition.x,
+        playerPos.y - enemySourcePosition.y
+    };
+ 
+    direction = Vector2Normalize(direction);
+    knockBackVelocity = Vector2Scale(direction, knockBackPower); // Basically just direction * knockbackPower
 }
