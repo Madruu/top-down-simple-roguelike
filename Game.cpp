@@ -83,9 +83,6 @@ void Game::DeleteInactiveProjectiles()
 
 void Game::CheckCollision()
 {
-    //GetCollisionRec;
-    //CheckCollisionRecs
-    
     for(auto& enemy : enemies) {
         Rectangle playerRect = player.GetRect();
         Rectangle enemyRect = enemy.GetRect();
