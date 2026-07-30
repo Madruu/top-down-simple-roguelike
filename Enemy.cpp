@@ -49,3 +49,8 @@ void Enemy::FollowPlayer(const Vector2& playerPosition)
     
     position = Vector2Add(position, Vector2Scale(direction, moveSpeed * GetFrameTime()));
 }
+
+Rectangle Enemy::GetRect()
+{
+    return { position.x, position.y, static_cast<float>(spr_enemies[type - 1].width), static_cast<float>(spr_enemies[type - 1].height)};
+}

@@ -11,7 +11,8 @@ class Player{
         void FireProjectile();
         Vector2 GetPosition() const;
         std::vector<Projectile> projectiles;
-
+        Rectangle GetRect();
+        void TakeDamage(int damage);
     private:
         Texture2D spr_player;
         Vector2 playerPos;

@@ -86,3 +86,9 @@ Vector2 Player::GetPosition() const
         playerPos.y + spr_player.height / 2
     };
 }
+
+
+Rectangle Player::GetRect()
+{
+    return { playerPos.x, playerPos.y, static_cast<float>(spr_player.width), static_cast<float>(spr_player.height)};
+}

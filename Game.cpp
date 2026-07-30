@@ -23,6 +23,8 @@ void Game::Update()
         for(auto& enemy : enemies){
             enemy.Update(player.GetPosition());
         }
+
+        CheckCollision();
     }
 }
 
@@ -81,5 +83,17 @@ void Game::DeleteInactiveProjectiles()
 
 void Game::CheckCollision()
 {
-   
+    //GetCollisionRec;
+    //CheckCollisionRecs
+    
+    for(auto& enemy : enemies) {
+        Rectangle playerRect = player.GetRect();
+        Rectangle enemyRect = enemy.GetRect();
+        collided = CheckCollisionRecs(playerRect, enemyRect);
+        if(collided)
+        {
+            boxCollision = GetCollisionRec(playerRect, enemyRect);
+            std::cout << "Colidiu!" << std::endl;
+        }
+    }
 }
