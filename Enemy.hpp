@@ -2,19 +2,18 @@
 #include <raylib.h>
 class Enemy {
     public:
-        Enemy(int type, Vector2 position, Vector2 target);
-        ~Enemy();
+        Enemy(int type, Vector2 position);
         void Draw();
-        void Update(Vector2 position);
-        static Texture2D spr_enemies[3];
-        int GetEnemyType();
+        void Update(const Vector2& position);
+        int GetEnemyType() const;
         static void UnloadImages();
         Rectangle GetRect();
-        int type;
 
     private:
         int type;
+        float moveSpeed = 200.0f;
+        //int moveSpeed = 3;
+        void FollowPlayer(const Vector2& playerPosition);
         Vector2 position;
-        Vector2 target;
-    
+        static Texture2D spr_enemies[3]; 
 }; 

@@ -9,7 +9,7 @@ class Player{
         void Draw();
         void MovePlayer();
         void FireProjectile();
-        //Vector2 GetMouseAim();
+        Vector2 GetPosition() const;
         std::vector<Projectile> projectiles;
 
     private:

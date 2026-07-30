@@ -78,3 +78,11 @@ Vector2 Player::GetMouseAim()
 
     return direction;
 }
+
+Vector2 Player::GetPosition() const
+{
+    return {
+        playerPos.x + spr_player.width / 2,
+        playerPos.y + spr_player.height / 2
+    };
+}

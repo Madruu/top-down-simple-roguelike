@@ -19,12 +19,24 @@ void Game::Update()
             laser.Update();
         }
         DeleteInactiveProjectiles();
+
+        for(auto& enemy : enemies){
+            enemy.Update(player.GetPosition());
+        }
     }
 }
 
 void Game::InitGame()
 {
     run = true;
+    CreateEnemy(1, {100, 100});
+    CreateEnemy(1, {200, 200});
+    CreateEnemy(1, {300, 300});
+}
+
+void Game::CreateEnemy(int type, Vector2 position)
+{
+    enemies.push_back(Enemy(type, position));
 }
 
 void Game::Draw()
@@ -32,6 +44,10 @@ void Game::Draw()
     player.Draw();
     for(auto& projectile : player.projectiles){
         projectile.Draw();
+    }
+
+    for(auto& enemy : enemies){
+        enemy.Draw();
     }
 }
 
@@ -61,4 +77,9 @@ void Game::DeleteInactiveProjectiles()
             ++it;
         }
     }
+}
+
+void Game::CheckCollision()
+{
+   
 }

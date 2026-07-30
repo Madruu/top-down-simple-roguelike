@@ -12,12 +12,11 @@ class Game{
     private:
         void InitGame();
         void DeleteInactiveProjectiles();
+        void UpdateEnemies();
+        void DrawEnemies();
         Player player;
         bool run;
-        std::vector<Enemy> CreateEnemy();
+        void CreateEnemy(int type, Vector2 position);
         std::vector<Enemy> enemies;
-        //Vector2 FollowPlayer();
-        //void moveEnemys();
-        //void checkCollision();
-        
+        void CheckCollision();    
 };
