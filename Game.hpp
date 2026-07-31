@@ -2,6 +2,7 @@
 #include "Player.hpp"
 #include "Projectile.hpp"
 #include "Enemy.hpp"
+#include <vector>
 class Game{
     public:
         Game();
@@ -21,4 +22,6 @@ class Game{
         void CheckCollision();
         Rectangle boxCollision = { 0 };    
         bool collided;
+        std::vector<Rectangle> collisionTiles;
+        
 };

@@ -37,6 +37,9 @@ void Player::HandleInput()
 
 void Player::MovePlayer()
 {
+    //Save position
+    SavePosition();
+
     // Keyboard Movement
     playerPos.x += input.x * speed * GetFrameTime();
     playerPos.y += input.y * speed * GetFrameTime();
@@ -49,6 +52,16 @@ void Player::MovePlayer()
 
     // Decreases knockback
     knockBackVelocity = Vector2Scale(knockBackVelocity, 0.9f);
+}
+
+void Player::SavePosition()
+{
+    oldPlayerPosition = playerPos;
+}
+
+void Player::RestorePosition()
+{
+    playerPos = oldPlayerPosition;
 }
 
 void Player::Draw()

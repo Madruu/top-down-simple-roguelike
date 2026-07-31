@@ -1,5 +1,5 @@
 #include "Game.hpp"
-#include<iostream>
+#include <iostream>
 
 Game::Game()
 {
@@ -32,9 +32,10 @@ void Game::Update()
 void Game::InitGame()
 {
     run = true;
-    CreateEnemy(1, {100, 100});
-    CreateEnemy(1, {200, 200});
-    CreateEnemy(1, {300, 300});
+    collisionTiles.push_back({100, 100, 64, 64});
+    //CreateEnemy(1, {100, 100});
+    //CreateEnemy(1, {200, 200});
+    //CreateEnemy(1, {300, 300});
 }
 
 void Game::CreateEnemy(int type, Vector2 position)
@@ -51,6 +52,10 @@ void Game::Draw()
 
     for(auto& enemy : enemies){
         enemy.Draw();
+    }
+
+    for(auto& tile : collisionTiles) {
+        DrawRectangleRec(tile, WHITE);
     }
 }
 
@@ -84,6 +89,7 @@ void Game::DeleteInactiveProjectiles()
 
 void Game::CheckCollision()
 {
+    //Enemies
     for(auto& enemy : enemies) {
         Rectangle playerRect = player.GetRect();
         Rectangle enemyRect = enemy.GetRect();
@@ -93,6 +99,18 @@ void Game::CheckCollision()
             boxCollision = GetCollisionRec(playerRect, enemyRect);
             std::cout << "Collided!" << std::endl;
             player.TakeDamage(2, enemy.GetEnemyPosition());
+        }
+    }
+
+    //Wall
+    for(auto& tile : collisionTiles) {
+        Rectangle playerRect = player.GetRect();
+        
+        collided = CheckCollisionRecs(playerRect, tile);
+        //DrawRectangle()
+        if(collided)
+        {
+            player.RestorePosition();
         }
     }
 }
