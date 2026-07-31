@@ -15,7 +15,18 @@ void Game::Update()
 {
     if(run)
     {
-        player.MovePlayer();
+        player.MoveX();
+        if(CheckCollisionWithTiles())
+        {
+            std::cout << "CollidiuX" << std::endl;
+            player.RestoreX();
+        }
+        player.MoveY();
+        if(CheckCollisionWithTiles())
+        {
+            std::cout << "CollidiuY" << std::endl;
+            player.RestoreY();
+        }
         for(auto& laser: player.projectiles){
             laser.Update();
         }
@@ -25,7 +36,8 @@ void Game::Update()
             enemy.Update(player.GetPosition());
         }
 
-        CheckCollision();
+        CheckCollisionWithEnemy();
+        player.KnockBack();
     }
 }
 
@@ -87,7 +99,7 @@ void Game::DeleteInactiveProjectiles()
     }
 }
 
-void Game::CheckCollision()
+void Game::CheckCollisionWithEnemy()
 {
     //Enemies
     for(auto& enemy : enemies) {
@@ -101,16 +113,17 @@ void Game::CheckCollision()
             player.TakeDamage(2, enemy.GetEnemyPosition());
         }
     }
+}
 
-    //Wall
+bool Game::CheckCollisionWithTiles()
+{
+    Rectangle playerBox = player.GetRect();
     for(auto& tile : collisionTiles) {
-        Rectangle playerRect = player.GetRect();
-        
-        collided = CheckCollisionRecs(playerRect, tile);
-        //DrawRectangle()
+        collided = CheckCollisionRecs(playerBox, tile);
         if(collided)
         {
-            player.RestorePosition();
+            return true;
         }
     }
+    return false;
 }

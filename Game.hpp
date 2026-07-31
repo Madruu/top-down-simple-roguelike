@@ -19,9 +19,9 @@ class Game{
         bool run;
         void CreateEnemy(int type, Vector2 position);
         std::vector<Enemy> enemies;
-        void CheckCollision();
+        void CheckCollisionWithEnemy();
+        bool CheckCollisionWithTiles();
         Rectangle boxCollision = { 0 };    
         bool collided;
         std::vector<Rectangle> collisionTiles;
-        
 };

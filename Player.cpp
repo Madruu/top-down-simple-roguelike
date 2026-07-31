@@ -35,33 +35,16 @@ void Player::HandleInput()
     }
 }
 
-void Player::MovePlayer()
+void Player::MoveX()
 {
-    //Save position
-    SavePosition();
-
-    // Keyboard Movement
+    SaveX();
     playerPos.x += input.x * speed * GetFrameTime();
+}
+
+void Player::MoveY()
+{
+    SaveY();
     playerPos.y += input.y * speed * GetFrameTime();
-
-    // Knockback movement
-     playerPos = Vector2Add(
-        playerPos,
-        Vector2Scale(knockBackVelocity, GetFrameTime())
-    );
-
-    // Decreases knockback
-    knockBackVelocity = Vector2Scale(knockBackVelocity, 0.9f);
-}
-
-void Player::SavePosition()
-{
-    oldPlayerPosition = playerPos;
-}
-
-void Player::RestorePosition()
-{
-    playerPos = oldPlayerPosition;
 }
 
 void Player::Draw()
@@ -132,4 +115,40 @@ void Player::TakeDamage(int damage, const Vector2& enemySourcePosition)
  
     direction = Vector2Normalize(direction);
     knockBackVelocity = Vector2Scale(direction, knockBackPower); // Basically just direction * knockbackPower
+}
+
+void Player::SaveX()
+{
+    oldPlayerPosition.x = playerPos.x;
+}
+
+void Player::RestoreX()
+{
+    playerPos.x = oldPlayerPosition.x;
+}
+
+void Player::SaveY()
+{
+    oldPlayerPosition.y = playerPos.y;
+}
+
+void Player::RestoreY()
+{
+    playerPos.y = oldPlayerPosition.y;
+}
+
+void Player::KnockBack()
+{   
+    playerPos = Vector2Add(
+        playerPos,
+        Vector2Scale(knockBackVelocity, GetFrameTime())
+    );
+
+    // Decreases knockback
+    knockBackVelocity = Vector2Scale(knockBackVelocity, 0.9f);
+}
+
+void Player::Animate()
+{
+
 }
