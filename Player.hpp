@@ -23,7 +23,9 @@ class Player{
         void RestoreY();
         void KnockBack();
     private:
-        Texture2D spr_player;
+        Texture2D spr_player_sheet;
+        Texture2D spr_tileGround;
+        Rectangle GetTextureRect();
         Vector2 playerPos;
         Vector2 GetMouseAim();
         float speed = 200.0f;
@@ -35,4 +37,11 @@ class Player{
         void Animate();
         Vector2 input = { 0.0f, 0.0f };
         void GetCollisionWithBothAxis();
+        Vector2 GetCenter();
+        int totalFrames = 5;
+        int currentFrame = 0;
+        int frameHeight = 32;
+        int frameWidth = 160;
+        float frameTimer = 0.0f;
+        float frameSpeed = 0.1f;
 };  

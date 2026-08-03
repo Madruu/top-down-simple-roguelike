@@ -27,6 +27,9 @@ void Game::Update()
             std::cout << "CollidiuY" << std::endl;
             player.RestoreY();
         }
+
+        camera.Update(player.GetPosition());
+
         for(auto& laser: player.projectiles){
             laser.Update();
         }
@@ -56,7 +59,9 @@ void Game::CreateEnemy(int type, Vector2 position)
 }
 
 void Game::Draw()
-{
+{   
+    camera.Begin();
+
     player.Draw();
     for(auto& projectile : player.projectiles){
         projectile.Draw();
@@ -69,6 +74,8 @@ void Game::Draw()
     for(auto& tile : collisionTiles) {
         DrawRectangleRec(tile, WHITE);
     }
+    
+    camera.End();
 }
 
 void Game::HandleInputs()

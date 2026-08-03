@@ -5,7 +5,7 @@ int main ()
 {   
     int windowWidth = 1280;
     int windowHeight = 720;
-    Color grey = {29, 29, 27, 255};
+    //Color grey = {29, 29, 27, 255};
     const int FPS = 60;
     InitWindow(windowWidth, windowHeight, "Top down RPG");
     Game game;
@@ -16,7 +16,7 @@ int main ()
         game.Update();
         game.HandleInputs();
         BeginDrawing();
-            ClearBackground(grey);
+            ClearBackground(BLACK);
             game.Draw();
         EndDrawing();
     };

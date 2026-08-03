@@ -2,6 +2,7 @@
 #include "Player.hpp"
 #include "Projectile.hpp"
 #include "Enemy.hpp"
+#include "CameraGame.hpp"
 #include <vector>
 class Game{
     public:
@@ -16,12 +17,14 @@ class Game{
         void UpdateEnemies();
         void DrawEnemies();
         Player player;
+        CameraGame camera;
         bool run;
         void CreateEnemy(int type, Vector2 position);
         std::vector<Enemy> enemies;
         void CheckCollisionWithEnemy();
         bool CheckCollisionWithTiles();
-        Rectangle boxCollision = { 0 };    
+        Rectangle boxCollision = { 0 };  
+        Rectangle tileSetGround;  
         bool collided;
         std::vector<Rectangle> collisionTiles;
 };

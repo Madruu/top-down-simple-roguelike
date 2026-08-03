@@ -7,15 +7,18 @@
 
 Player::Player()
 {
-    spr_player = LoadTexture("assets/spr_player_big.png");
+    spr_player_sheet = LoadTexture("assets/spr_player1_Sheet.png");
+    spr_tileGround = LoadTexture("assets/grountiled.png");
     playerPos.x = GetScreenWidth() / 2;
     playerPos.y = GetScreenHeight() / 2;
+    frameWidth = spr_player_sheet.width / totalFrames;
+    frameHeight = spr_player_sheet.height;
     lastTimeFired = 0;
 }
 
 Player::~Player()
 {
-    UnloadTexture(spr_player);
+    UnloadTexture(spr_player_sheet);
 }
 
 void Player::HandleInput()
@@ -49,7 +52,27 @@ void Player::MoveY()
 
 void Player::Draw()
 {
-    DrawTextureV(spr_player, playerPos, WHITE);
+    frameTimer += GetFrameTime();
+
+    if(frameTimer >= frameSpeed)
+    {
+        frameTimer = 0.0;
+        currentFrame++;
+
+        if(currentFrame >= totalFrames)
+        {
+            currentFrame = 0;
+        }
+    }
+
+    Rectangle srcRect = {
+        static_cast<float>(currentFrame * frameWidth),
+        0.0f,
+        static_cast<float>(frameWidth),
+        static_cast<float>(frameHeight)
+    };
+    
+    DrawTextureRec(spr_player_sheet, srcRect, playerPos, WHITE);
 }
 
 void Player::FireProjectile()
@@ -57,8 +80,8 @@ void Player::FireProjectile()
     if(GetTime() - lastTimeFired >= 0.1)
     {
         Vector2 playerCenter = {
-            playerPos.x + spr_player.width / 2,
-            playerPos.y + spr_player.height / 2
+            playerPos.x + spr_player_sheet.width / 2,
+            playerPos.y + spr_player_sheet.height / 2
         };
 
         projectiles.push_back(
@@ -74,8 +97,8 @@ Vector2 Player::GetMouseAim()
     Vector2 mouseLocation = GetMousePosition();
 
     Vector2 playerCenter = {
-        playerPos.x + spr_player.width / 2,
-        playerPos.y + spr_player.height / 2
+        playerPos.x + spr_player_sheet.width / 2,
+        playerPos.y + spr_player_sheet.height / 2
     };
 
     Vector2 direction;
@@ -88,18 +111,22 @@ Vector2 Player::GetMouseAim()
     return direction;
 }
 
+Vector2 Player::GetCenter()
+{
+    return { playerPos.x + frameWidth / 2.0f, playerPos.y + frameHeight / 2.0f };
+}
+
 Vector2 Player::GetPosition() const
 {
     return {
-        playerPos.x + spr_player.width / 2,
-        playerPos.y + spr_player.height / 2
+        playerPos.x + spr_player_sheet.width / 2,
+        playerPos.y + spr_player_sheet.height / 2
     };
 }
 
-
 Rectangle Player::GetRect()
 {
-    return { playerPos.x, playerPos.y, static_cast<float>(spr_player.width), static_cast<float>(spr_player.height)};
+    return { playerPos.x, playerPos.y, static_cast<float>(frameWidth), static_cast<float>(frameHeight) };
 }
 
 void Player::TakeDamage(int damage, const Vector2& enemySourcePosition)
@@ -146,9 +173,4 @@ void Player::KnockBack()
 
     // Decreases knockback
     knockBackVelocity = Vector2Scale(knockBackVelocity, 0.9f);
-}
-
-void Player::Animate()
-{
-
 }
