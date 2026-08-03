@@ -80,8 +80,8 @@ void Player::FireProjectile()
     if(GetTime() - lastTimeFired >= 0.1)
     {
         Vector2 playerCenter = {
-            playerPos.x + spr_player_sheet.width / 2,
-            playerPos.y + spr_player_sheet.height / 2
+            playerPos.x + frameWidth / 2,
+            playerPos.y + frameHeight / 2
         };
 
         projectiles.push_back(
@@ -97,8 +97,8 @@ Vector2 Player::GetMouseAim()
     Vector2 mouseLocation = GetMousePosition();
 
     Vector2 playerCenter = {
-        playerPos.x + spr_player_sheet.width / 2,
-        playerPos.y + spr_player_sheet.height / 2
+        playerPos.x + frameWidth / 2,
+        playerPos.y + frameHeight / 2
     };
 
     Vector2 direction;
@@ -119,8 +119,8 @@ Vector2 Player::GetCenter()
 Vector2 Player::GetPosition() const
 {
     return {
-        playerPos.x + spr_player_sheet.width / 2,
-        playerPos.y + spr_player_sheet.height / 2
+        playerPos.x + frameWidth / 2.0f,
+        playerPos.y + frameHeight / 2.0f
     };
 }
 
