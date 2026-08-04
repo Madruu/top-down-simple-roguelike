@@ -13,6 +13,7 @@ class Player{
         void MoveX();
         void MoveY();
         Vector2 GetPosition() const;
+        Vector2 GetCenter();
         std::vector<Projectile> projectiles;
         Rectangle GetRect();
         void HandleInput();
@@ -37,7 +38,7 @@ class Player{
         void Animate();
         Vector2 input = { 0.0f, 0.0f };
         void GetCollisionWithBothAxis();
-        Vector2 GetCenter();
+        //Vector2 GetCenter();
         int totalFrames = 5;
         int currentFrame = 0;
         int frameHeight = 32;

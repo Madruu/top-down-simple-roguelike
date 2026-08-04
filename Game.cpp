@@ -26,7 +26,7 @@ void Game::Update()
             player.RestoreY();
         }
 
-        camera.Update(player.GetPosition());
+        camera.Update(player.GetCenter());
 
         for(auto& laser: player.projectiles){
             laser.Update();
@@ -83,7 +83,7 @@ void Game::HandleInputs()
     {
         player.HandleInput();
         
-        if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        if(IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
         {
             std::cout << "Projectile fired" << std::endl;
             player.FireProjectile();

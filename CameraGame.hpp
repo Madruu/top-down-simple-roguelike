@@ -11,7 +11,6 @@ class CameraGame {
         void End();
     private:
         Camera2D camera;
-        Player player;
         int frameHeight = 32;
         int frameWidth = 160;
         float smoothSpeed = 4.0f;

@@ -16,7 +16,7 @@ void Projectile::Draw()
          std::cout << "Projectile pos: "
                   << position.x << ", "
                   << position.y << std::endl;
-        DrawRectangle(position.x, position.y, 5, 40, {255, 255, 255, 255});
+        DrawRectangle(position.x, position.y, 5, 5, {255, 255, 255, 255});
     }
 }
 
