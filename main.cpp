@@ -1,11 +1,11 @@
 #include <iostream>
 #include <raylib.h>
+#include "external/raytmx/raytmx.h"
 #include "Game.hpp"
 int main () 
 {   
     int windowWidth = 1280;
     int windowHeight = 720;
-    //Color grey = {29, 29, 27, 255};
     const int FPS = 60;
     InitWindow(windowWidth, windowHeight, "Top down RPG");
     Game game;

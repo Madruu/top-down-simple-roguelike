@@ -3,6 +3,7 @@
 #include "Projectile.hpp"
 #include "Enemy.hpp"
 #include "CameraGame.hpp"
+#include "TileMap.hpp"
 #include <vector>
 class Game{
     public:
@@ -18,7 +19,9 @@ class Game{
         void DrawEnemies();
         Player player;
         CameraGame camera;
+        TileMap tileMap;
         bool run;
+        void InitTileMap();
         void CreateEnemy(int type, Vector2 position);
         std::vector<Enemy> enemies;
         void CheckCollisionWithEnemy();

@@ -18,13 +18,11 @@ void Game::Update()
         player.MoveX();
         if(CheckCollisionWithTiles())
         {
-            std::cout << "CollidiuX" << std::endl;
             player.RestoreX();
         }
         player.MoveY();
         if(CheckCollisionWithTiles())
         {
-            std::cout << "CollidiuY" << std::endl;
             player.RestoreY();
         }
 
@@ -48,6 +46,7 @@ void Game::InitGame()
 {
     run = true;
     collisionTiles.push_back({100, 100, 64, 64});
+    
     //CreateEnemy(1, {100, 100});
     //CreateEnemy(1, {200, 200});
     //CreateEnemy(1, {300, 300});
@@ -61,7 +60,7 @@ void Game::CreateEnemy(int type, Vector2 position)
 void Game::Draw()
 {   
     camera.Begin();
-
+    tileMap.Draw();
     player.Draw();
     for(auto& projectile : player.projectiles){
         projectile.Draw();
