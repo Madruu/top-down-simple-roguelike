@@ -2,47 +2,49 @@
 #include <raylib.h>
 #include <vector>
 #include "Projectile.hpp"
+#include "SlashAttack.hpp"
 
 class Player{
-    public:
-        Player();
-        ~Player();
-        void Draw();
-        void FireProjectile();
-        void MovePlayer();
-        void MoveX();
-        void MoveY();
-        Vector2 GetPosition() const;
-        Vector2 GetCenter();
-        std::vector<Projectile> projectiles;
-        Rectangle GetRect();
-        void HandleInput();
-        void TakeDamage(int damage, const Vector2& enemySourcePosition);
-        void SaveX();
-        void SaveY();
-        void RestoreX();
-        void RestoreY();
-        void KnockBack();
-    private:
-        Texture2D spr_player_sheet;
-        Texture2D spr_tileGround;
-        Rectangle GetTextureRect();
-        Vector2 playerPos;
-        Vector2 GetMouseAim();
-        float speed = 200.0f;
-        double lastTimeFired;
-        Vector2 oldPlayerPosition;
-        int health = 10;
-        int knockBackPower = 1000;
-        Vector2 knockBackVelocity = { 0.0f, 0.0f };
-        void Animate();
-        Vector2 input = { 0.0f, 0.0f };
-        void GetCollisionWithBothAxis();
-        //Vector2 GetCenter();
-        int totalFrames = 5;
-        int currentFrame = 0;
-        int frameHeight = 32;
-        int frameWidth = 160;
-        float frameTimer = 0.0f;
-        float frameSpeed = 0.1f;
+        public:
+                Player();
+                ~Player();
+                void Draw();
+                void FireProjectile();
+                void AttackSlash();
+                void MovePlayer();
+                void MoveX();
+                void MoveY();
+                Vector2 GetPosition() const;
+                Vector2 GetCenter();
+                std::vector<SlashAttack> slashes;
+                std::vector<Projectile> projectiles;
+                Rectangle GetRect();
+                void HandleInput();
+                void TakeDamage(int damage, const Vector2& enemySourcePosition);
+                void SaveX();
+                void SaveY();
+                void RestoreX();
+                void RestoreY();
+                void KnockBack();
+        private:
+                Texture2D spr_player_sheet;
+                Rectangle GetTextureRect();
+                Vector2 playerPos;
+                Vector2 GetMouseAim();
+                float speed = 200.0f;
+                double lastTimeFired;
+                Vector2 oldPlayerPosition;
+                int health = 10;
+                int knockBackPower = 1000;
+                Vector2 knockBackVelocity = { 0.0f, 0.0f };
+                void Animate();
+                Vector2 input = { 0.0f, 0.0f };
+                void GetCollisionWithBothAxis();
+                int totalFrames = 5;
+                int currentFrame = 0;
+                int frameHeight = 32;
+                int frameWidth = 160;
+                float frameTimer = 0.0f;
+                float frameSpeed = 0.1f;
+                Vector2 attackDirection;
 };  

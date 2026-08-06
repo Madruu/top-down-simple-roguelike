@@ -4,23 +4,23 @@
 #include "Game.hpp"
 int main () 
 {   
-    int windowWidth = 1280;
-    int windowHeight = 720;
-    const int FPS = 60;
-    InitWindow(windowWidth, windowHeight, "Top down RPG");
-    Game game;
-    SetTargetFPS(FPS);
+        int windowWidth = 1280;
+        int windowHeight = 720;
+        const int FPS = 60;
+        InitWindow(windowWidth, windowHeight, "Top down RPG");
+        Game game;
+        SetTargetFPS(FPS);
 
-    while(WindowShouldClose() == false) {
+        while(WindowShouldClose() == false) {
 
-        game.Update();
-        game.HandleInputs();
-        BeginDrawing();
-            ClearBackground(BLACK);
-            game.Draw();
-        EndDrawing();
-    };
+                game.Update();
+                game.HandleInputs();
+                BeginDrawing();
+                        ClearBackground(BLACK);
+                        game.Draw();
+                EndDrawing();
+        };
 
-    CloseWindow();
-    return 0;
+        CloseWindow();
+        return 0;
 }

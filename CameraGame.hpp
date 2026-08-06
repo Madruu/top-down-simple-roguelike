@@ -3,15 +3,15 @@
 #include <raylib.h>
 
 class CameraGame {
-    public: 
-        CameraGame();
-        ~CameraGame();
-        void Update(const Vector2& targetPosition);
-        void Begin();
-        void End();
-    private:
-        Camera2D camera;
-        int frameHeight = 32;
-        int frameWidth = 160;
-        float smoothSpeed = 4.0f;
+        public: 
+                CameraGame();
+                ~CameraGame();
+                void Update(const Vector2& targetPosition);
+                void Begin();
+                void End();
+        private:
+                Camera2D camera;
+                int frameHeight = 32;
+                int frameWidth = 160;
+                float smoothSpeed = 4.0f;
 };
