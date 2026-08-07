@@ -1,6 +1,7 @@
 #pragma once
 #include <raylib.h>
 #include <vector>
+#include <memory>
 #include "Projectile.hpp"
 #include "SlashAttack.hpp"
 
@@ -11,11 +12,11 @@ class Player{
                 void Draw();
                 void FireProjectile();
                 void AttackSlash();
-                void MovePlayer();
                 void MoveX();
                 void MoveY();
                 Vector2 GetPosition() const;
                 Vector2 GetCenter();
+                //SlashAttack slashes;
                 std::vector<SlashAttack> slashes;
                 std::vector<Projectile> projectiles;
                 Rectangle GetRect();
@@ -37,9 +38,7 @@ class Player{
                 int health = 10;
                 int knockBackPower = 1000;
                 Vector2 knockBackVelocity = { 0.0f, 0.0f };
-                void Animate();
                 Vector2 input = { 0.0f, 0.0f };
-                void GetCollisionWithBothAxis();
                 int totalFrames = 5;
                 int currentFrame = 0;
                 int frameHeight = 32;

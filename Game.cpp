@@ -42,9 +42,10 @@ void Game::Update()
                 }
 
                 for(auto& slash : player.slashes){
-                        slash.Update();
+                        slash.Update(player.GetCenter());
                 }
-
+                
+                DeleteInactiveSlashes();
                 CheckCollisionWithEnemy();
                 player.KnockBack();
         }
@@ -53,11 +54,11 @@ void Game::Update()
 void Game::InitGame()
 {
         run = true;
-        collisionTiles.push_back({100, 100, 64, 64});
+        collisionTiles.push_back({ 100, 100, 64, 64 });
     
-    //CreateEnemy(1, {100, 100});
-    //CreateEnemy(1, {200, 200});
-    //CreateEnemy(1, {300, 300});
+        //CreateEnemy(1, {100, 100});
+        //CreateEnemy(1, {200, 200});
+        //CreateEnemy(1, {300, 300});
 }
 
 void Game::CreateEnemy(int type, Vector2 position)
@@ -68,24 +69,23 @@ void Game::CreateEnemy(int type, Vector2 position)
 void Game::Draw()
 {   
         camera.Begin();
-        tileMap.Draw();
-        player.Draw();
-        for(auto& projectile : player.projectiles){
-                projectile.Draw();
-        }
+                tileMap.Draw();
+                player.Draw();
+                for(auto& projectile : player.projectiles){
+                        projectile.Draw();
+                }
 
-        for(auto& enemy : enemies){
-                enemy.Draw();
-        }
+                for(auto& enemy : enemies){
+                        enemy.Draw();
+                }
 
-        for(auto& tile : collisionTiles) {
-                DrawRectangleRec(tile, WHITE);
-        }
+                for(auto& tile : collisionTiles) {
+                        DrawRectangleRec(tile, WHITE);
+                }
 
-        for(auto& slash : player.slashes){
-                slash.Update();
-        }
-        
+                for(auto& slash : player.slashes){
+                        slash.Draw();
+                }
         camera.End();
 }
 
@@ -105,6 +105,7 @@ void Game::HandleInputs()
                 if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
                 {
                         player.AttackSlash();
+                        std::cout << "SLASH!" << std::endl;
                 }
         }
 }
@@ -117,23 +118,35 @@ void Game::DeleteInactiveProjectiles()
                         it = player.projectiles.erase(it);
                         std::cout << "Proj deleted" << std::endl;
                 } else {
-                         ++it;
+                        ++it;
+                }
+        }
+}
+
+void Game::DeleteInactiveSlashes()
+{
+        for(auto it = player.slashes.begin(); it != player.slashes.end();){
+                if(!it -> isActive)
+                {
+                        it = player.slashes.erase(it);
+                        std::cout << "slash deleted" << std::endl;
+                } else {
+                        ++it;
                 }
         }
 }
 
 void Game::CheckCollisionWithEnemy()
 {
-        //Enemies
         for(auto& enemy : enemies) {
                 Rectangle playerRect = player.GetRect();
                 Rectangle enemyRect = enemy.GetRect();
                 collided = CheckCollisionRecs(playerRect, enemyRect);
                 if(collided)
                 {
-                boxCollision = GetCollisionRec(playerRect, enemyRect);
-                std::cout << "Collided!" << std::endl;
-                player.TakeDamage(2, enemy.GetEnemyPosition());
+                        boxCollision = GetCollisionRec(playerRect, enemyRect);
+                        std::cout << "Collided!" << std::endl;
+                        player.TakeDamage(2, enemy.GetEnemyPosition());
                 }
         }
 }
@@ -145,7 +158,7 @@ bool Game::CheckCollisionWithTiles()
                 collided = CheckCollisionRecs(playerBox, tile);
                 if(collided)
                 {
-                return true;
+                        return true;
                 }
         }
         return false;

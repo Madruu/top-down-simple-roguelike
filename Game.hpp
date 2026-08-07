@@ -16,6 +16,7 @@ class Game{
         private:
                 void InitGame();
                 void DeleteInactiveProjectiles();
+                void DeleteInactiveSlashes();
                 void UpdateEnemies();
                 void DrawEnemies();
                 Player player;
@@ -30,6 +31,7 @@ class Game{
                 Rectangle boxCollision = { 0 };  
                 Rectangle tileSetGround;  
                 bool collided;
-                std::vector<SlashAttack> slashes;
+                SlashAttack slashes;
+                //std::vector<SlashAttack> slashes;
                 std::vector<Rectangle> collisionTiles;
 };

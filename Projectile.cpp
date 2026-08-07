@@ -13,9 +13,9 @@ void Projectile::Draw()
 {
         if(isActive)
         {
-                std::cout << "Projectile pos: "
-                        << position.x << ", "
-                        << position.y << std::endl;
+                // std::cout << "Projectile pos: "
+                //         << position.x << ", "
+                //         << position.y << std::endl;
                 DrawRectangle(position.x, position.y, 5, 5, {255, 255, 255, 255});
         }
 }

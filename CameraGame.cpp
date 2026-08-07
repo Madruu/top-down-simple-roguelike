@@ -31,7 +31,7 @@ void CameraGame::Update(const Vector2& playerPosition)
 
         Vector2 mouseOffset = Vector2Subtract(mouse, screenCenter);
 
-        float lookAhead = 0.1f;
+        float lookAhead = 0.05f;
 
         mouseOffset = Vector2Scale(mouseOffset, lookAhead);
 

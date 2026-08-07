@@ -17,6 +17,7 @@ int main ()
                 game.HandleInputs();
                 BeginDrawing();
                         ClearBackground(BLACK);
+                        //std::cout << FPS << std::endl;
                         game.Draw();
                 EndDrawing();
         };

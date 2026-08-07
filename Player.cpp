@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include "Projectile.hpp"
 #include <raylib.h>
 #include <raymath.h>
 #include <cmath>
@@ -60,7 +59,7 @@ void Player::Draw()
 
                 if(currentFrame >= totalFrames)
                 {
-                currentFrame = 0;
+                        currentFrame = 0;
                 }
         }
 
@@ -119,8 +118,9 @@ void Player::AttackSlash()
                 playerPos.y + frameHeight / 2
         };
 
-        int slashInterval = 3;
+        int slashInterval = 300;
 
+        //slashes = SlashAttack(playerCenter, mousePosition, slashInterval);
         slashes.push_back(
                 SlashAttack(playerCenter, mousePosition, slashInterval)
         );
